@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Header2" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/header2</item>
+    </style>
+
+    <style name="Header3" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/header3</item>
+    </style>
+
+    <style name="Paragraph1" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/paragraph1</item>
+    </style>
+
+    <style name="Paragraph1Medium" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/paragraph1</item>
+    </style>
+
+    <style name="Paragraph2" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/paragraph2</item>
+    </style>
+
+    <style name="Paragraph2Medium" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/paragraph2</item>
+    </style>
+
+    <style name="Paragraph3" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/paragraph3</item>
+    </style>
+
+    <style name="Paragraph3Medium" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/paragraph3</item>
+    </style>
+
+    <style name="Paragraph4" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/paragraph4</item>
+    </style>
+
+    <style name="Paragraph4Medium" parent="android:TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/paragraph4</item>
+    </style>
+
+</resources>

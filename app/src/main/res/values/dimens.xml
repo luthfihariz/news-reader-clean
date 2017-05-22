@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header2">30sp</dimen>
+    <dimen name="header3">25sp</dimen>
+    <dimen name="paragraph1">16sp</dimen>
+    <dimen name="paragraph2">14sp</dimen>
+    <dimen name="paragraph3">12sp</dimen>
+    <dimen name="paragraph4">10sp</dimen>
+
+    <dimen name="xxx_small_margin">2dp</dimen>
+    <dimen name="xx_small_margin">4dp</dimen>
+    <dimen name="x_small_margin">8dp</dimen>
+    <dimen name="small_margin">14dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+    <dimen name="big_margin">18dp</dimen>
+    <dimen name="x_big_margin">22dp</dimen>
+    <dimen name="xx_big_margin">26dp</dimen>
+    <dimen name="xxx_big_margin">28dp</dimen>
+
+</resources>
