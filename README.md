@@ -1,4 +1,4 @@
-# News Reader Clean
+# Clean News Reader
 This is a simple news reader Android app to demonstrate Android clean code using MVP presentation layer, 
 RxJava 2 and Repository Pattern to support offline first architecture.
 
