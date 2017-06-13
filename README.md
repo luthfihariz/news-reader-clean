@@ -9,4 +9,7 @@ RxJava 2, Room and Repository Pattern to support offline first architecture.
 * Glide
 * Room Persistence Library 
 
+# What's Next
+Unit Testing
+
 API source : [newsapi.org](https://newsapi.org/)
