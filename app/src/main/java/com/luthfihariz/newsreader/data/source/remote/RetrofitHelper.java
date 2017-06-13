@@ -50,10 +50,10 @@ public class RetrofitHelper {
 
     Retrofit provideRetrofit() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-                .addInterceptor(provideHttpLoggingInterceptor())
                 .addInterceptor(provideParamInterceptor())
-                .readTimeout(20, TimeUnit.SECONDS)
-                .connectTimeout(20, TimeUnit.SECONDS);
+                .addInterceptor(provideHttpLoggingInterceptor())
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS);
 
         Gson gson = new GsonBuilder().setLenient().serializeNulls().create();
         return new Retrofit.Builder()

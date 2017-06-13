@@ -25,14 +25,15 @@
 
             <TextView
                 android:id="@+id/tv_title"
-                style="@style/Paragraph2"
+                style="@style/Paragraph1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Security researcher found a WannaCry fix for some infected computers" />
 
             <TextView
                 android:id="@+id/tv_source"
-                style="@style/Paragraph3"
+                style="@style/Paragraph2"
+                android:textColor="@color/colorPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_title"
@@ -41,7 +42,7 @@
 
             <TextView
                 android:id="@+id/tv_date"
-                style="@style/Paragraph4"
+                style="@style/Paragraph3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

@@ -39,28 +39,33 @@ public class RemoteDataSource implements NewsDataSource {
 
     @Override
     public Observable<List<Article>> getArticles(String sources) {
-        return getArticles(sources, null);
+        return mApiService.getArticles(sources)
+                .map(ArticleResponse::getArticles);
     }
 
     @Override
-    public Observable<List<Article>> getArticles(String sources, String sortBy) {
-        return mApiService.getArticles(sources, sortBy)
-                .map(new Function<ArticleResponse, List<Article>>() {
-                    @Override
-                    public List<Article> apply(@NonNull ArticleResponse articleResponse) throws Exception {
-                        return articleResponse.getArticles();
-                    }
-                });
+    public Observable<List<Article>> getArticles() {
+        return mApiService.getArticles(null)
+                .map(ArticleResponse::getArticles);
     }
 
     @Override
     public Observable<List<Source>> getSources() {
-        return mApiService.getSources(null, null, null)
-                .map(new Function<SourceResponse, List<Source>>() {
-                    @Override
-                    public List<Source> apply(@NonNull SourceResponse sourceResponse) throws Exception {
-                        return sourceResponse.getSources();
-                    }
-                });
+        return mApiService.getSources().map(SourceResponse::getSources);
+    }
+
+    @Override
+    public Observable<Void> saveUserSelectedSources(List<Source> selectedSources) {
+        throw new RuntimeException("Function not implemented");
+    }
+
+    @Override
+    public Observable<List<Source>> getUserSelectedSources() {
+        throw new RuntimeException("Function not implemented");
+    }
+
+    @Override
+    public Observable<Boolean> isSelectedSourceEmpty() {
+        throw new RuntimeException("Function not implemented");
     }
 }

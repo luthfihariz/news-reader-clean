@@ -13,11 +13,15 @@ import java.util.List;
 public class MainContract {
     interface Presenter extends BasePresenter<View> {
         void getArticles();
+
+        void isUserPickAnySource();
     }
 
     interface View extends BaseView<Presenter> {
         void showArticles(List<Article> articles);
 
         void showErrorView();
+
+        void goToSourcePicker();
     }
 }

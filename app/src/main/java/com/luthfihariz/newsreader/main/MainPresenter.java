@@ -4,12 +4,8 @@ import com.luthfihariz.newsreader.data.Article;
 import com.luthfihariz.newsreader.data.source.NewsRepository;
 import com.luthfihariz.newsreader.util.schedulers.BaseSchedulerProvider;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 
 /**
@@ -20,11 +16,13 @@ public class MainPresenter implements MainContract.Presenter {
 
     private NewsRepository mRepository;
     private MainContract.View mView;
-    private BaseSchedulerProvider mProvider;
+    private BaseSchedulerProvider mScheduler;
+    private List<Article> mArticles;
 
     public MainPresenter(NewsRepository repository, BaseSchedulerProvider schedulerProvider) {
         mRepository = repository;
-        mProvider = schedulerProvider;
+        mScheduler = schedulerProvider;
+        mArticles = new ArrayList<>();
     }
 
     @Override
@@ -41,29 +39,44 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getArticles() {
-        mRepository.getArticles("techcrunch")
-                .subscribeOn(mProvider.io())
-                .observeOn(mProvider.ui())
-                .subscribe(new Observer<List<Article>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
+        mRepository.getArticles()
+                .subscribeOn(mScheduler.io())
+                .observeOn(mScheduler.ui())
+                .doOnNext(this::showArticles)
+                .doOnError(this::showErrorView)
+                .subscribe();
+    }
 
-                    }
+    @Override
+    public void isUserPickAnySource() {
+        mRepository.isSelectedSourceEmpty()
+                .subscribeOn(mScheduler.io())
+                .observeOn(mScheduler.ui())
+                .doOnNext(this::goToSourcePicker)
+                .doOnError(this::showErrorView)
+                .subscribe();
+    }
 
-                    @Override
-                    public void onNext(@NonNull List<Article> articles) {
-                        mView.showArticles(articles);
-                    }
+    private void goToSourcePicker(Boolean isEmpty) {
+        if (mView != null) {
+            if (isEmpty) {
+                mView.goToSourcePicker();
+            } else {
+                getArticles();
+            }
+        }
+    }
 
-                    @Override
-                    public void onError(@NonNull Throwable e) {
+    private void showArticles(List<Article> articles) {
+        if (mView != null) {
+            mArticles.addAll(articles);
+            mView.showArticles(mArticles);
+        }
+    }
 
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
+    private void showErrorView(Throwable e) {
+        if (mView != null) {
+            mView.showErrorView();
+        }
     }
 }

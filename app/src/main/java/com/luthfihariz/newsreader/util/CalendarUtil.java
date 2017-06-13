@@ -35,7 +35,7 @@ public class CalendarUtil {
             Date oldPatternDate = dateFormat.parse(date);
             dateFormat.applyPattern(pattern);
             return dateFormat.format(oldPatternDate);
-        } catch (ParseException e) {
+        } catch (ParseException | NullPointerException e) {
             return null;
         }
     }

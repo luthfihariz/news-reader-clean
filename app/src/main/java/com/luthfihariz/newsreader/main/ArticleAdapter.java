@@ -2,6 +2,7 @@ package com.luthfihariz.newsreader.main;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.support.v7.util.DiffUtil;
 import android.view.View;
 
 import com.luthfihariz.newsreader.BaseBindingAdapter;
@@ -21,10 +22,19 @@ public class ArticleAdapter extends BaseBindingAdapter {
 
     private List<Article> mArticles;
     private Context mContext;
+    private View.OnClickListener mListener;
 
-    public ArticleAdapter(Context context, List<Article> articles) {
+    public ArticleAdapter(Context context, List<Article> articles, View.OnClickListener listener) {
         mArticles = articles;
         mContext = context;
+        mListener = listener;
+    }
+
+    void updateList(List<Article> newList) {
+
+        DiffUtil.DiffResult diffResult = DiffUtil
+                .calculateDiff(new ArticleDiffCallback(mArticles, newList));
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @Override
@@ -33,7 +43,7 @@ public class ArticleAdapter extends BaseBindingAdapter {
         Article article = mArticles.get(position);
         itemBinding.tvTitle.setText(article.getTitle());
         itemBinding.tvDate.setText(CalendarUtil.adjustTimePattern(article.getPublishedAt(),
-                "yyyy-MM-dd'T'HH:mm:ss'Z'", "MM-dd"));
+                "yyyy-MM-dd'T'HH:mm:ss'Z'", "MMM dd"));
         itemBinding.tvSource.setText(article.getAuthor());
         GlideApp.with(mContext)
                 .load(article.getUrlToImage())
@@ -48,7 +58,7 @@ public class ArticleAdapter extends BaseBindingAdapter {
 
     @Override
     protected View.OnClickListener getOnClickListener() {
-        return null;
+        return mListener;
     }
 
     @Override

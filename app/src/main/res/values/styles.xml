@@ -52,4 +52,11 @@
         <item name="android:textSize">@dimen/paragraph4</item>
     </style>
 
+    <style name="PrimaryButton">
+        <item name="android:background">@drawable/selector_primary_button</item>
+        <item name="android:minHeight">28dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

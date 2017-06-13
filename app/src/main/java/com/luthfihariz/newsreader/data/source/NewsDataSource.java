@@ -16,7 +16,13 @@ public interface NewsDataSource {
 
     Observable<List<Article>> getArticles(String sources);
 
-    Observable<List<Article>> getArticles(String sources, String sortBy);
+    Observable<List<Article>> getArticles();
 
     Observable<List<Source>> getSources();
+
+    Observable<Void> saveUserSelectedSources(List<Source> selectedSources);
+
+    Observable<List<Source>> getUserSelectedSources();
+
+    Observable<Boolean> isSelectedSourceEmpty();
 }

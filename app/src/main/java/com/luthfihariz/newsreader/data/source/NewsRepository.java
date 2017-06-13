@@ -8,6 +8,13 @@ import com.luthfihariz.newsreader.data.source.remote.RemoteDataSource;
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+
+import static io.reactivex.Observable.fromIterable;
 
 
 /**
@@ -34,18 +41,36 @@ public class NewsRepository implements NewsDataSource {
         return sInstance;
     }
 
+
+    public Observable<List<Article>> getArticles() {
+        Observable<List<Source>> userSourcesObservable = getUserSelectedSources();
+
+        return userSourcesObservable.flatMap(sources -> Observable.fromIterable(sources)
+                .flatMap(source -> mRemoteDataSource.getArticles(source.getId())));
+    }
+
     @Override
     public Observable<List<Article>> getArticles(String sources) {
         return mRemoteDataSource.getArticles(sources);
     }
 
     @Override
-    public Observable<List<Article>> getArticles(String sources, String sortBy) {
-        return mRemoteDataSource.getArticles(sources, sortBy);
+    public Observable<List<Source>> getSources() {
+        return mRemoteDataSource.getSources();
     }
 
     @Override
-    public Observable<List<Source>> getSources() {
-        return mRemoteDataSource.getSources();
+    public Observable<Void> saveUserSelectedSources(List<Source> sources) {
+        return mLocalDataSource.saveUserSelectedSources(sources);
+    }
+
+    @Override
+    public Observable<List<Source>> getUserSelectedSources() {
+        return mLocalDataSource.getUserSelectedSources();
+    }
+
+    @Override
+    public Observable<Boolean> isSelectedSourceEmpty() {
+        return mLocalDataSource.isSelectedSourceEmpty();
     }
 }

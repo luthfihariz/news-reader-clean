@@ -35,4 +35,9 @@ public class Article {
     public String getPublishedAt() {
         return publishedAt;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Article && title.equals(((Article) obj).getTitle());
+    }
 }
