@@ -12,14 +12,14 @@ import java.util.List;
  * Created by luthfihariz on 5/20/17.
  */
 
-public class MainPresenter implements MainContract.Presenter {
+class MainPresenter implements MainContract.Presenter {
 
     private NewsRepository mRepository;
     private MainContract.View mView;
     private BaseSchedulerProvider mScheduler;
     private List<Article> mArticles;
 
-    public MainPresenter(NewsRepository repository, BaseSchedulerProvider schedulerProvider) {
+    MainPresenter(NewsRepository repository, BaseSchedulerProvider schedulerProvider) {
         mRepository = repository;
         mScheduler = schedulerProvider;
         mArticles = new ArrayList<>();

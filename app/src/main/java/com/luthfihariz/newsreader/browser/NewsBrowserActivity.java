@@ -1,12 +1,21 @@
 package com.luthfihariz.newsreader.browser;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.luthfihariz.newsreader.R;
 import com.luthfihariz.newsreader.databinding.ActivityNewsBrowserBinding;
@@ -18,19 +27,34 @@ import com.luthfihariz.newsreader.databinding.ActivityNewsBrowserBinding;
 public class NewsBrowserActivity extends AppCompatActivity implements NewsBrowserContract.View {
 
     public static final String KEY_URL = "url";
-    private NewsBrowserContract.Presenter mPresenter;
+    public static final String KEY_NEWS_TITLE = "newsTitle";
 
-    ActivityNewsBrowserBinding mBinding;
+    private NewsBrowserContract.Presenter mPresenter;
+    private ActivityNewsBrowserBinding mBinding;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_news_browser);
-        setupWebView();
+
+        String url = getIntent().getStringExtra(KEY_URL);
+        String title = getIntent().getStringExtra(KEY_NEWS_TITLE);
+        String subtitle = Uri.parse(url).getHost();
+        setupToolbar(title, subtitle);
+        setupWebView(url);
     }
 
-    private void setupWebView(){
-        String url = getIntent().getStringExtra(KEY_URL);
+    private void setupToolbar(String title, String subtitle) {
+        setSupportActionBar(mBinding.toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle(title);
+            getSupportActionBar().setSubtitle(subtitle);
+        }
+    }
+
+    private void setupWebView(String url) {
+        mBinding.wvNewsBrowser.setWebViewClient(new BrowserWebViewClient());
         mBinding.wvNewsBrowser.loadUrl(url);
     }
 
@@ -40,9 +64,37 @@ public class NewsBrowserActivity extends AppCompatActivity implements NewsBrowse
     }
 
 
-    public static void intent(Context context, String url) {
+    public static void intent(Context context, String url, String newsTitle) {
         Intent intent = new Intent(context, NewsBrowserActivity.class);
         intent.putExtra(KEY_URL, url);
+        intent.putExtra(KEY_NEWS_TITLE, newsTitle);
         context.startActivity(intent);
+    }
+
+    private class BrowserWebViewClient extends WebViewClient {
+
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            view.loadUrl(request.getUrl().toString());
+            return true;
+        }
+
+        @SuppressWarnings("deprecation")
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

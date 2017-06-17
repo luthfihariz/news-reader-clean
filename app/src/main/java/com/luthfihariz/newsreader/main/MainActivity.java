@@ -31,11 +31,13 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mBinding.rvNews.setLayoutManager(new LinearLayoutManager(this));
 
-
+        // presenter initialization
         mPresenter = new MainPresenter(
                 Injection.provideRepository(getApplicationContext()),
                 Injection.provideScheduler());
         mPresenter.bind(this);
+
+        // ask presenter if any source is picked
         mPresenter.isUserPickAnySource();
     }
 
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             mAdapter = new ArticleAdapter(this, articles, v -> {
                 BaseBindingViewHolder holder = (BaseBindingViewHolder) v.getTag();
                 Article article = articles.get(holder.getAdapterPosition());
-                NewsBrowserActivity.intent(this, article.getUrl());
+                NewsBrowserActivity.intent(this, article.getUrl(), article.getTitle());
             });
             mBinding.rvNews.setAdapter(mAdapter);
         } else {
