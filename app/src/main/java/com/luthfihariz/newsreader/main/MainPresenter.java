@@ -39,6 +39,7 @@ class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getArticles() {
+        mView.showProgress();
         mRepository.getArticles()
                 .subscribeOn(mScheduler.io())
                 .observeOn(mScheduler.ui())
@@ -49,6 +50,7 @@ class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void isUserPickAnySource() {
+        mView.showProgress();
         mRepository.isSelectedSourceEmpty()
                 .subscribeOn(mScheduler.io())
                 .observeOn(mScheduler.ui())
@@ -69,13 +71,15 @@ class MainPresenter implements MainContract.Presenter {
 
     private void showArticles(List<Article> articles) {
         if (mView != null) {
-            mArticles.addAll(articles);
+            mView.hideProgress();
+            mArticles.addAll(0, articles);
             mView.showArticles(mArticles);
         }
     }
 
     private void showErrorView(Throwable e) {
         if (mView != null) {
+            mView.hideProgress();
             mView.showErrorView();
         }
     }

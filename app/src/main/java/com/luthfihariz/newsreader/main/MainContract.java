@@ -23,5 +23,9 @@ public class MainContract {
         void showErrorView();
 
         void goToSourcePicker();
+
+        void hideProgress();
+
+        void showProgress();
     }
 }

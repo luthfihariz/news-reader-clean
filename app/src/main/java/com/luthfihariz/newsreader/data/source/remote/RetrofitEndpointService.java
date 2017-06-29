@@ -19,6 +19,6 @@ public interface RetrofitEndpointService {
     @GET(apiVersion + "/articles")
     Observable<ArticleResponse> getArticles(@Query("source") String source);
 
-    @GET(apiVersion + "/sources&language=en")
+    @GET(apiVersion + "/sources?language=en")
     Observable<SourceResponse> getSources();
 }

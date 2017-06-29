@@ -6,6 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.luthfihariz.newsreader.BaseBindingViewHolder;
 import com.luthfihariz.newsreader.Injection;
@@ -78,8 +81,34 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
 
+    @Override
+    public void hideProgress() {
+        mBinding.pbNews.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgress() {
+        mBinding.pbNews.setVisibility(View.VISIBLE);
+    }
+
     public static void intent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_pick_channel) {
+            goToSourcePicker();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

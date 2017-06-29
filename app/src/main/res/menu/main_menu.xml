@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_pick_channel"
+        android:icon="@drawable/ic_pick_channel"
+        android:title="@string/all_pick_channel"
+        app:showAsAction="always" />
+</menu>

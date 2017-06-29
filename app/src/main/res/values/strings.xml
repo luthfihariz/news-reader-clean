@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">News Reader</string>
     <string name="all_save">Save</string>
+    <string name="all_pick_channel">Pick Your News Channel</string>
 </resources>

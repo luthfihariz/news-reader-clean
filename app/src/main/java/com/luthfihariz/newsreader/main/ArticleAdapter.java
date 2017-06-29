@@ -18,20 +18,19 @@ import java.util.List;
  * Created by luthfihariz on 5/21/17.
  */
 
-public class ArticleAdapter extends BaseBindingAdapter {
+class ArticleAdapter extends BaseBindingAdapter {
 
     private List<Article> mArticles;
     private Context mContext;
     private View.OnClickListener mListener;
 
-    public ArticleAdapter(Context context, List<Article> articles, View.OnClickListener listener) {
+    ArticleAdapter(Context context, List<Article> articles, View.OnClickListener listener) {
         mArticles = articles;
         mContext = context;
         mListener = listener;
     }
 
     void updateList(List<Article> newList) {
-
         DiffUtil.DiffResult diffResult = DiffUtil
                 .calculateDiff(new ArticleDiffCallback(mArticles, newList));
         diffResult.dispatchUpdatesTo(this);
