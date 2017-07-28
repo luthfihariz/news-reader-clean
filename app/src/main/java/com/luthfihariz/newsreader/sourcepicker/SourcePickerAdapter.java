@@ -1,12 +1,10 @@
 package com.luthfihariz.newsreader.sourcepicker;
 
-import android.content.Context;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.luthfihariz.newsreader.BaseBindingAdapter;
-import com.luthfihariz.newsreader.BaseBindingViewHolder;
 import com.luthfihariz.newsreader.R;
 import com.luthfihariz.newsreader.data.Source;
 import com.luthfihariz.newsreader.databinding.ItemSourceBinding;
@@ -18,13 +16,13 @@ import java.util.List;
  * Created by luthfihariz on 5/22/17.
  */
 
-public class SourcePickerAdapter extends BaseBindingAdapter {
+class SourcePickerAdapter extends BaseBindingAdapter {
 
     private List<Source> mSources;
     private List<Source> mSelectedSources;
     private View.OnClickListener mListener;
 
-    public SourcePickerAdapter(List<Source> sources, View.OnClickListener listener) {
+    SourcePickerAdapter(List<Source> sources, View.OnClickListener listener) {
         mSources = sources;
         mListener = listener;
         mSelectedSources = new ArrayList<>();

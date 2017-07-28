@@ -63,6 +63,7 @@ public class SourcePickerPresenter implements SourcePickerContract.Presenter {
                     public void onError(@NonNull Throwable e) {
                         if (mView != null) {
                             mView.hideProgressBar();
+                            mView.showErrorView();
                         }
                     }
 

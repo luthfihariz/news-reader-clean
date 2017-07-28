@@ -9,12 +9,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.luthfihariz.newsreader.Injection;
 import com.luthfihariz.newsreader.R;
 import com.luthfihariz.newsreader.data.Source;
 import com.luthfihariz.newsreader.databinding.ActivitySourcePickerBinding;
 import com.luthfihariz.newsreader.main.MainActivity;
+import com.luthfihariz.newsreader.util.CollectionUtil;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class SourcePickerActivity extends AppCompatActivity implements SourcePic
 
     private ActivitySourcePickerBinding mBinding;
     private SourcePickerContract.Presenter mPresenter;
+    private SourcePickerAdapter mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class SourcePickerActivity extends AppCompatActivity implements SourcePic
 
     private void setupToolbar() {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Pick Your News Channel");
+            getSupportActionBar().setTitle(R.string.all_pick_channel);
         }
     }
 
@@ -59,14 +62,21 @@ public class SourcePickerActivity extends AppCompatActivity implements SourcePic
 
     @Override
     public void showSources(List<Source> sources) {
-        SourcePickerAdapter adapter = new SourcePickerAdapter(sources, null);
-        mBinding.rvSource.setLayoutManager(new GridLayoutManager(this, 3));
-        mBinding.rvSource.setAdapter(adapter);
+        mAdapter = new SourcePickerAdapter(sources, v -> {
+            if (CollectionUtil.isEmpty(mAdapter.getSelectedSources())) {
+                mBinding.btnSave.setVisibility(View.GONE);
+            } else {
+                mBinding.btnSave.setVisibility(View.VISIBLE);
+            }
+        });
+        mBinding.rvSource.setLayoutManager(new GridLayoutManager(this, 2));
+        mBinding.rvSource.setAdapter(mAdapter);
     }
 
     @Override
     public void showErrorView() {
-
+        Snackbar.make(mBinding.getRoot(), R.string.all_general_error, Toast.LENGTH_SHORT)
+                .show();
     }
 
     @Override
