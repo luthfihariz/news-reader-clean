@@ -11,12 +11,19 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            app:theme="@style/NewsBrowserToolbar"/>
+            app:theme="@style/NewsBrowserToolbar" />
 
-        <WebView
-            android:id="@+id/wv_news_browser"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_news_browser"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <WebView
+                android:id="@+id/wv_news_browser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
 
     </LinearLayout>

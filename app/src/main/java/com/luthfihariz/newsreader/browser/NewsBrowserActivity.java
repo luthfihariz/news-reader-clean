@@ -4,10 +4,12 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +58,10 @@ public class NewsBrowserActivity extends AppCompatActivity implements NewsBrowse
     private void setupWebView(String url) {
         mBinding.wvNewsBrowser.setWebViewClient(new BrowserWebViewClient());
         mBinding.wvNewsBrowser.loadUrl(url);
+
+        mBinding.srlNewsBrowser.setOnRefreshListener(() -> {
+            mBinding.wvNewsBrowser.loadUrl(url);
+        });
     }
 
     @Override
@@ -85,6 +91,18 @@ public class NewsBrowserActivity extends AppCompatActivity implements NewsBrowse
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            mBinding.srlNewsBrowser.setRefreshing(true);
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            mBinding.srlNewsBrowser.setRefreshing(false);
         }
     }
 
