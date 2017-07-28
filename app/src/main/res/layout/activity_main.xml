@@ -6,22 +6,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/soft_gray"
-        android:padding="@dimen/x_small_margin"
         tools:context="com.luthfihariz.newsreader.MainActivity">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_news"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/srl_news"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_news" />
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_news"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/pb_news"
+                android:padding="@dimen/x_small_margin"
+                tools:listitem="@layout/item_news" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
 
-        <ProgressBar
+        <!--<ProgressBar
             android:id="@+id/pb_news"
-            android:layout_width="wrap_content"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:visibility="gone" />
+            android:layout_alignParentTop="true" />-->
 
     </RelativeLayout>
 </layout>

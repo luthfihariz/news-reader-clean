@@ -25,4 +25,6 @@ public interface NewsDataSource {
     Observable<List<Source>> getUserSelectedSources();
 
     Observable<Boolean> isSelectedSourceEmpty();
+
+    Observable<Integer> getUserSelectedSourceSize();
 }

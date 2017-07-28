@@ -18,6 +18,8 @@ class MainPresenter implements MainContract.Presenter {
     private MainContract.View mView;
     private BaseSchedulerProvider mScheduler;
     private List<Article> mArticles;
+    private int mNumberOfSource;
+    private int mArticlesLoaded;
 
     MainPresenter(NewsRepository repository, BaseSchedulerProvider schedulerProvider) {
         mRepository = repository;
@@ -51,7 +53,7 @@ class MainPresenter implements MainContract.Presenter {
     @Override
     public void isUserPickAnySource() {
         mView.showProgress();
-        mRepository.isSelectedSourceEmpty()
+        mRepository.getUserSelectedSourceSize()
                 .subscribeOn(mScheduler.io())
                 .observeOn(mScheduler.ui())
                 .doOnNext(this::goToSourcePicker)
@@ -59,9 +61,17 @@ class MainPresenter implements MainContract.Presenter {
                 .subscribe();
     }
 
-    private void goToSourcePicker(Boolean isEmpty) {
+    @Override
+    public void refresh() {
+        mArticles.clear();
+        mArticlesLoaded = 0;
+        getArticles();
+    }
+
+    private void goToSourcePicker(Integer sourcePickedSize) {
+        mNumberOfSource = sourcePickedSize;
         if (mView != null) {
-            if (isEmpty) {
+            if (sourcePickedSize == 0) {
                 mView.goToSourcePicker();
             } else {
                 getArticles();
@@ -71,9 +81,12 @@ class MainPresenter implements MainContract.Presenter {
 
     private void showArticles(List<Article> articles) {
         if (mView != null) {
-            mView.hideProgress();
-            mArticles.addAll(0, articles);
+            mArticles.addAll(articles);
             mView.showArticles(mArticles);
+            mArticlesLoaded++;
+            if (mArticlesLoaded == mNumberOfSource) {
+                mView.hideProgress();
+            }
         }
     }
 

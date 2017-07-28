@@ -32,11 +32,13 @@ public class ArticleDiffCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return mOldArticles.get(oldItemPosition) == mNewArticles.get(newItemPosition);
+        return mOldArticles.get(oldItemPosition).equals(mNewArticles.get(newItemPosition));
     }
 
     @Override
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
-        return mOldArticles.get(oldItemPosition).equals(mNewArticles.get(newItemPosition));
+        Article oldItem = mOldArticles.get(oldItemPosition);
+        Article newItem = mNewArticles.get(newItemPosition);
+        return oldItem.getTitle().equals(newItem.getTitle());
     }
 }

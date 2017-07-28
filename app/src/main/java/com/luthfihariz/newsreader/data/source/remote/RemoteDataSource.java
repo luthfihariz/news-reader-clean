@@ -68,4 +68,9 @@ public class RemoteDataSource implements NewsDataSource {
     public Observable<Boolean> isSelectedSourceEmpty() {
         throw new RuntimeException("Function not implemented");
     }
+
+    @Override
+    public Observable<Integer> getUserSelectedSourceSize() {
+        throw new RuntimeException("Function not implemented");
+    }
 }

@@ -65,11 +65,16 @@ public class LocalDataSource implements NewsDataSource {
     @Override
     public Observable<Boolean> isSelectedSourceEmpty() {
         Observable<Integer> countObservable = Observable.fromPublisher(mRoomDb.getSourceDao().count());
-        return countObservable.flatMap(new Function<Integer, ObservableSource<Boolean>>() {
+        return countObservable.flatMap(new Function<Integer, Observable<Boolean>>() {
             @Override
-            public ObservableSource<Boolean> apply(@NonNull Integer integer) throws Exception {
+            public Observable<Boolean> apply(@NonNull Integer integer) throws Exception {
                 return Observable.just(integer == 0);
             }
         });
+    }
+
+    @Override
+    public Observable<Integer> getUserSelectedSourceSize() {
+        return Observable.fromPublisher(mRoomDb.getSourceDao().count());
     }
 }

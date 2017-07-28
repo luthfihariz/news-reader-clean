@@ -73,4 +73,9 @@ public class NewsRepository implements NewsDataSource {
     public Observable<Boolean> isSelectedSourceEmpty() {
         return mLocalDataSource.isSelectedSourceEmpty();
     }
+
+    @Override
+    public Observable<Integer> getUserSelectedSourceSize() {
+        return mLocalDataSource.getUserSelectedSourceSize();
+    }
 }

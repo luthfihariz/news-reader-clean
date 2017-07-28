@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Menu;
@@ -42,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
         // ask presenter if any source is picked
         mPresenter.isUserPickAnySource();
+
+        mBinding.srlNews.setOnRefreshListener(() -> {
+            mPresenter.refresh();
+        });
     }
 
     @Override
@@ -83,12 +88,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     @Override
     public void hideProgress() {
-        mBinding.pbNews.setVisibility(View.GONE);
+        mBinding.srlNews.setRefreshing(false);
     }
 
     @Override
     public void showProgress() {
-        mBinding.pbNews.setVisibility(View.VISIBLE);
+        mBinding.srlNews.setRefreshing(true);
     }
 
     public static void intent(Context context) {

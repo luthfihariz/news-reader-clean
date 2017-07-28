@@ -15,6 +15,8 @@ public class MainContract {
         void getArticles();
 
         void isUserPickAnySource();
+
+        void refresh();
     }
 
     interface View extends BaseView<Presenter> {

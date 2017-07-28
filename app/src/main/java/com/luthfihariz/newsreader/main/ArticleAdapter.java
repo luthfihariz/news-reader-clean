@@ -2,6 +2,7 @@ package com.luthfihariz.newsreader.main;
 
 import android.content.Context;
 import android.databinding.ViewDataBinding;
+import android.net.Uri;
 import android.support.v7.util.DiffUtil;
 import android.view.View;
 
@@ -32,7 +33,7 @@ class ArticleAdapter extends BaseBindingAdapter {
 
     void updateList(List<Article> newList) {
         DiffUtil.DiffResult diffResult = DiffUtil
-                .calculateDiff(new ArticleDiffCallback(mArticles, newList));
+                .calculateDiff(new ArticleDiffCallback(mArticles, newList), true);
         diffResult.dispatchUpdatesTo(this);
     }
 
@@ -43,7 +44,7 @@ class ArticleAdapter extends BaseBindingAdapter {
         itemBinding.tvTitle.setText(article.getTitle());
         itemBinding.tvDate.setText(CalendarUtil.adjustTimePattern(article.getPublishedAt(),
                 "yyyy-MM-dd'T'HH:mm:ss'Z'", "MMM dd"));
-        itemBinding.tvSource.setText(article.getAuthor());
+        itemBinding.tvSource.setText(Uri.parse(article.getUrl()).getHost());
         GlideApp.with(mContext)
                 .load(article.getUrlToImage())
                 .placeholder(R.drawable.placeholder)
