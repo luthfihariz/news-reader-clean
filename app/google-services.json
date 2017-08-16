@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "423070695705",
+    "firebase_url": "https://indigo-d74a0.firebaseio.com",
+    "project_id": "indigo-d74a0",
+    "storage_bucket": "indigo-d74a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423070695705:android:8385cb357c6f9b1e",
+        "android_client_info": {
+          "package_name": "com.luthfihariz.newsreader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423070695705-c0vudfc7ffigoi8hjn9r1c5q0s33cucq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luthfihariz.newsreader",
+            "certificate_hash": "7de2d27d04468fc4774ca31f581a3b6916845ed3"
+          }
+        },
+        {
+          "client_id": "423070695705-31tfns3u45ddtqof3cse6bong8kmndt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0H51P0n6jK0XEYfmWNIS80faDh9btODs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423070695705-31tfns3u45ddtqof3cse6bong8kmndt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

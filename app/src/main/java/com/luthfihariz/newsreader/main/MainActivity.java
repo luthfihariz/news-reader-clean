@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.firebase.crash.FirebaseCrash;
 import com.luthfihariz.newsreader.BaseBindingViewHolder;
 import com.luthfihariz.newsreader.Injection;
 import com.luthfihariz.newsreader.R;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mBinding.rvNews.setLayoutManager(new LinearLayoutManager(this));
 

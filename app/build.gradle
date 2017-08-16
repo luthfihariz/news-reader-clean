@@ -54,6 +54,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
 
+    // analytics
+    compile 'com.google.firebase:firebase-core:10.2.6'
+
     // glide
     compile 'com.github.bumptech.glide:glide:4.0.0-RC0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
@@ -77,4 +80,10 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-alpha1'
 
     testCompile 'junit:junit:4.12'
+
+    compile 'com.google.firebase:firebase-crash:10.2.6'
 }
+
+
+// Add to the bottom of the file
+apply plugin: 'com.google.gms.google-services'

@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/soft_gray"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
