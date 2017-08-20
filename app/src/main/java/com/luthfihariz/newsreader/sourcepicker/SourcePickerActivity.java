@@ -71,6 +71,15 @@ public class SourcePickerActivity extends AppCompatActivity implements SourcePic
         });
         mBinding.rvSource.setLayoutManager(new GridLayoutManager(this, 2));
         mBinding.rvSource.setAdapter(mAdapter);
+
+        mPresenter.getPreviouslySelectedSources();
+    }
+
+    @Override
+    public void showPreviouslySelectedSources(List<Source> sources) {
+        if (!CollectionUtil.isEmpty(sources)) {
+            mAdapter.setSelectedSources(sources);
+        }
     }
 
     @Override

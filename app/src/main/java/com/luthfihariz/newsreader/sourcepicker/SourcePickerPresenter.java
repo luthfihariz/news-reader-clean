@@ -11,6 +11,7 @@ import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by luthfihariz on 5/22/17.
@@ -72,6 +73,19 @@ public class SourcePickerPresenter implements SourcePickerContract.Presenter {
 
                     }
                 });
+    }
+
+    @Override
+    public void getPreviouslySelectedSources() {
+        mRepository.getUserSelectedSources()
+                .subscribeOn(mScheduler.io())
+                .observeOn(mScheduler.ui())
+                .doOnNext(sources -> {
+                    if (mView != null) {
+                        mView.showPreviouslySelectedSources(sources);
+                    }
+                })
+                .subscribe();
     }
 
     @Override

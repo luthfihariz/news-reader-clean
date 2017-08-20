@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_pick_channel) {
-            goToSourcePicker();
+            SourcePickerActivity.intent(this);
             return true;
         } else {
             return super.onOptionsItemSelected(item);

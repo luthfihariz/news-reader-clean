@@ -15,6 +15,8 @@ public class SourcePickerContract {
     interface View extends BaseView<Presenter> {
         void showSources(List<Source> sources);
 
+        void showPreviouslySelectedSources(List<Source> sources);
+
         void showErrorView();
 
         void showProgressBar();
@@ -26,6 +28,8 @@ public class SourcePickerContract {
 
     interface Presenter extends BasePresenter<View> {
         void getSources();
+
+        void getPreviouslySelectedSources();
 
         void saveSelectedSources(List<Source> selectedSources);
     }

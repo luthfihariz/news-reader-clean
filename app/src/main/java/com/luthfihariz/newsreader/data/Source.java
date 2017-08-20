@@ -3,6 +3,8 @@ package com.luthfihariz.newsreader.data;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.util.Objects;
+
 /**
  * Created by luthfihariz on 5/21/17.
  */
@@ -72,5 +74,10 @@ public class Source {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Source && ((Source) obj).getId().equals(id);
     }
 }

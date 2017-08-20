@@ -40,6 +40,11 @@ class SourcePickerAdapter extends BaseBindingAdapter {
         return mSelectedSources;
     }
 
+    void setSelectedSources(List<Source> sources) {
+        mSelectedSources = sources;
+        notifyDataSetChanged();
+    }
+
     @Override
     protected int getLayoutResource() {
         return R.layout.item_source;
