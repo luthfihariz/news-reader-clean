@@ -5,9 +5,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@android:color/white"
         android:layout_marginBottom="@dimen/x_small_margin"
+        android:background="@drawable/selector_item_news"
+        android:orientation="vertical"
         android:padding="@dimen/x_small_margin">
 
         <ImageView
@@ -17,11 +17,19 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/img_sample" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="@dimen/x_small_margin">
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/Paragraph3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                tools:text="2 days ago" />
 
             <TextView
                 android:id="@+id/tv_title"
@@ -32,25 +40,14 @@
 
             <TextView
                 android:id="@+id/tv_source"
-                style="@style/Paragraph2"
-                android:textColor="@color/colorPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_title"
-                android:layout_marginTop="@dimen/xx_small_margin"
-                tools:text="Techcrunch" />
-
-            <TextView
-                android:id="@+id/tv_date"
                 style="@style/Paragraph3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/tv_source"
-                android:textColor="@color/gray"
-                tools:text="2 days ago" />
+                android:textColor="@color/colorPrimary"
+                tools:text="Techcrunch" />
 
-        </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

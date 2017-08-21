@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
     public static void intent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
