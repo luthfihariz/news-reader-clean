@@ -45,9 +45,7 @@ class MainPresenter implements MainContract.Presenter {
         mRepository.getArticles()
                 .subscribeOn(mScheduler.io())
                 .observeOn(mScheduler.ui())
-                .doOnNext(this::showArticles)
-                .doOnError(this::showErrorView)
-                .subscribe();
+                .subscribe(this::showArticles, this::showErrorView);
     }
 
     @Override
@@ -56,9 +54,7 @@ class MainPresenter implements MainContract.Presenter {
         mRepository.getUserSelectedSourceSize()
                 .subscribeOn(mScheduler.io())
                 .observeOn(mScheduler.ui())
-                .doOnNext(this::goToSourcePicker)
-                .doOnError(this::showErrorView)
-                .subscribe();
+                .subscribe(this::goToSourcePicker, this::showErrorView);
     }
 
     @Override

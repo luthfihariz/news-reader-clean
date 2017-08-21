@@ -46,31 +46,16 @@ public class SourcePickerPresenter implements SourcePickerContract.Presenter {
         mRepository.getSources()
                 .subscribeOn(mScheduler.io())
                 .observeOn(mScheduler.ui())
-                .subscribe(new Observer<List<Source>>() {
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
+                .doOnNext(sources -> {
+                    if (mView != null) {
+                        mView.hideProgressBar();
+                        mView.showSources(sources);
                     }
-
-                    @Override
-                    public void onNext(@NonNull List<Source> sources) {
-                        if (mView != null) {
-                            mView.hideProgressBar();
-                            mView.showSources(sources);
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        if (mView != null) {
-                            mView.hideProgressBar();
-                            mView.showErrorView();
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
+                })
+                .doOnError(throwable -> {
+                    if (mView != null) {
+                        mView.hideProgressBar();
+                        mView.showErrorView();
                     }
                 });
     }
@@ -85,6 +70,7 @@ public class SourcePickerPresenter implements SourcePickerContract.Presenter {
                         mView.showPreviouslySelectedSources(sources);
                     }
                 })
+                .doOnError(throwable -> mView.showErrorView())
                 .subscribe();
     }
 
